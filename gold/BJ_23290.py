@@ -18,7 +18,14 @@ def fish_move():
                 for _ in range(8):
                     nx = fx + dir[d][0]
                     ny = fy + dir[d][1]
-                    if 0 > nx or nx >= 4 or 0 > ny or ny >= 4 or smell_map[nx][ny] or (nx, ny) == shark:
+                    if (
+                        0 > nx
+                        or nx >= 4
+                        or 0 > ny
+                        or ny >= 4
+                        or smell_map[nx][ny]
+                        or (nx, ny) == shark
+                    ):
                         d = (d - 1) % 8
                     else:
                         new_map[nx][ny].append(d)
