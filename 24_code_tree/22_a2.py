@@ -43,7 +43,7 @@ def rotate_line():
     for (x, y), (tx, ty) in zip(line_set[0], line_set[1]):
         new_map[tx][ty] = map_lst[x][y]
 
-    # 가로 -> 세로 변환(정순서)
+    # 가로 -> 세로 변환(역순서)
     for (x, y), (tx, ty) in zip(line_set[1], line_set[0][::-1]):
         new_map[tx][ty] = map_lst[x][y]
 
@@ -126,6 +126,7 @@ def bfs():
 def cal_score():
     global visited, queue, group_num, group
 
+    # visited는 그룹의 숫자가 써진 맵
     visited = [[0 for _ in range(n)] for _ in range(n)]
     queue = deque()
 
@@ -146,7 +147,7 @@ def cal_score():
 
     global num_matrix, num_adjacent, new_visited
 
-    # 그룹끼리 인접한 변의 갯수 찾기
+    # 그룹 당 갯수, 그룹 간 인접한 변의 갯수 찾기
     # idx 0은 쓰지 않는 값
     num_matrix = [0 for _ in range(group_num + 1)]
     num_adjacent = [[0 for _ in range(group_num + 1)] for _ in range(group_num + 1)]
@@ -161,7 +162,7 @@ def cal_score():
 
                 bfs_find_adjacent()
 
-    # 계산 결과 가지고 score 계산
+    # 계산 결과 가지고 score 계산, 우삼각행렬만 사용
     score = 0
     for cur_group in range(1, group_num+1):
         for tar_group in range(cur_group+1, group_num+1):
